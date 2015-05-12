@@ -44,17 +44,29 @@ void display()
 	// draw points
 	glPointSize(1.0f);
 	glBegin(GL_POINTS);
-
+	float fl_x = 1063.118f;
+	float fl_y = 1065.233f;
+	float pp_x = 962.473f;
+	float pp_y = 526.789f;
+	int Z = rPt.Z;
+	float xx=0;
+	float yy=0;
+	float zz=0;
 	for (int y = 0; y < iColorHeight; ++y)
 	{
 		for (int x = 0; x < iColorWidth; ++x)
 		{
 			int idx = x + y * iColorWidth;
 			const CameraSpacePoint& rPt = pCSPoints[idx];
+		
 			if (rPt.Z > 0)
 			{
+				xx =(i-pp_x)*rPt.Z/fl_x;
+				yy = (j-pp_y)*rPt.Z/fl_y;
+				zz=rPt.Z;
 				glColor4ubv((const GLubyte*)(&pColorBuffer[4 * idx]));
-				glVertex3f(rPt.X, rPt.Y, rPt.Z);
+				//glVertex3f(rPt.X, rPt.Y, rPt.Z);
+				glVertex3f(xx, -yy, rPt.Z);
 			}
 		}
 	}
